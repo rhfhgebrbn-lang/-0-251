@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Внимание!</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #121212;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            cursor: pointer;
+            user-select: none;
+            overflow: hidden;
+        }
+        
+        .warning-card {
+            text-align: center;
+            padding: 24px 20px 0 20px;
+            width: 85%;
+            max-width: 320px;
+            background-color: #1c1c1e;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            border: 1px solid #2c2c2e;
+            z-index: 10;
+        }
+        .icon-warning { font-size: 40px; margin-bottom: 10px; }
+        h2 { font-size: 19px; margin: 0 0 8px 0; color: #ff453a; font-weight: 600; }
+        p { font-size: 14px; margin: 0 0 20px 0; color: #ebebf599; line-height: 1.4; }
+        .btn-exit {
+            display: block;
+            width: calc(100% + 40px);
+            margin-left: -20px;
+            padding: 14px 0;
+            background-color: transparent;
+            border: none;
+            border-top: 1px solid #38383a;
+            color: #0a84ff;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        #prankVideo {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 100;
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="warning-card" id="warning">
+        <div class="icon-warning">⚠️</div>
+        <h2>Файл может быть заражен вирусом</h2>
+        <p>Обнаружена угроза безопасности. Рекомендуется немедленно покинуть страницу.</p>
+        <button class="btn-exit">Выйти</button>
+    </div>
+
+    <video id="prankVideo" src="lv_0_20260912021643.mp4" playsinline loop preload="auto"></video>
+
+    <script>
+        const warningCard = document.getElementById('warning');
+        const video = document.getElementById('prankVideo');
+        let isActivated = false;
+
+        document.body.addEventListener('click', () => {
+            if (isActivated) return;
+            isActivated = true;
+
+            warningCard.style.display = 'none';
+            video.style.display = 'block';
+            video.volume = 1.0;
+            video.play().catch(err => console.error(err));
+        });
+    </script>
+</body>
+</html>
